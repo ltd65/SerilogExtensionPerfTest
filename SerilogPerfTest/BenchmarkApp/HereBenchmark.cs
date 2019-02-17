@@ -18,28 +18,80 @@ namespace BenchmarkApp
         [Benchmark]
         public int WithHereDebugLevel()
         {
-            Logger.Here().Debug("Some Text");
+            for (int i = 0; i < 10; i++)
+            {
+                Logger.Here().Debug("Some Text {Value}", i);
+            }
+            return 0;
+        }
+
+        [Benchmark]
+        public int WithHereDebugLevelcsharpstring()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Logger.Here().Debug($"Some Text {i}");
+            }
             return 0;
         }
 
         [Benchmark]
         public int WithDebugLevel()
         {
-            Logger.Debug("Some Text");
+            for (int i = 0; i < 10; i++)
+            {
+                Logger.Debug("Some Text {Value}", i);
+            }
+            return 0;
+        }
+
+        [Benchmark]
+        public int WithDebugLevelcsharpstring()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Logger.Debug($"Some Text {i}");
+            }
             return 0;
         }
 
         [Benchmark]
         public int WithVerboseLevel()
         {
-            Logger.Verbose("Some Text");
+            for (int i = 0; i < 10; i++)
+            {
+                Logger.Verbose("Some Text {Value}", i);
+            }
+            return 0;
+        }
+
+        [Benchmark]
+        public int WithVerboseLevelcsharpstring()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Logger.Verbose($"Some Text {i}");
+            }
             return 0;
         }
 
         [Benchmark]
         public int WithHereVerboseLevel()
         {
-            Logger.Here().Debug("Some Text");
+            for (int i = 0; i < 10; i++)
+            {
+                Logger.Here().Verbose("Some Text {Value}", i);
+            }
+            return 0;
+        }
+
+        [Benchmark]
+        public int WithHereVerboseLevelcsharpstring()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Logger.Here().Verbose($"Some Text {i}");
+            }
             return 0;
         }
     }
