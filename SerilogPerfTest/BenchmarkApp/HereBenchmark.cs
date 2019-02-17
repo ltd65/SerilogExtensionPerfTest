@@ -7,7 +7,7 @@ using SerilogExtensions;
 
 namespace BenchmarkApp
 {
-    // [ClrJob] gives an error at the moment
+    [ClrJob]
     [CoreJob]
     [MarkdownExporter, AsciiDocExporter, HtmlExporter, RPlotExporter]
     [MemoryDiagnoser]
