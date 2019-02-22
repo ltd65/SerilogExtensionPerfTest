@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Serilog;
+using Serilog.Events;
 
 namespace SerilogExtensions
 {
@@ -21,6 +22,26 @@ namespace SerilogExtensions
             return logger.ForContext("CallerFilePath", file)
                 .ForContext("CallerMemberName", memberName)
                 .ForContext("CallerLineNumber", lineNumber);
+        }
+
+        /// <summary>
+        /// Logging extensions that adds the FilePath, MemberName and LineNumber to the logging context.
+        /// </summary>
+        /// <param name="logger">The logger instance.</param>
+        /// <param name="file">File (will be automatically filled by .NET)</param>
+        /// <param name="memberName">Member name (will be automatically filled by .NET)</param>
+        /// <param name="lineNumber">Line number (will be automatically filled by .NET)</param>
+        /// <returns>The logger instance</returns>
+        public static ILogger HereLvl(this ILogger logger, LogEventLevel level = LogEventLevel.Verbose, [CallerFilePath] string file = "", [CallerMemberName] string memberName = "", [CallerLineNumber] int lineNumber = 0)
+        {
+            if (logger.IsEnabled(level))
+            {
+                return logger.ForContext("CallerFilePath", file)
+                    .ForContext("CallerMemberName", memberName)
+                    .ForContext("CallerLineNumber", lineNumber);
+            }
+
+            return logger;
         }
     }
 }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using BenchmarkDotNet.Attributes;
 using Serilog;
+using Serilog.Events;
 using SerilogExtensions;
 
 namespace BenchmarkApp
 {
     [ClrJob]
     [CoreJob]
-    [MarkdownExporter, AsciiDocExporter, HtmlExporter, RPlotExporter]
+    [MarkdownExporter, AsciiDocExporter, HtmlExporter]//, RPlotExporter]
     [MemoryDiagnoser]
     public class HereBenchmark
     {
@@ -18,80 +19,37 @@ namespace BenchmarkApp
         [Benchmark]
         public int WithHereDebugLevel()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                Logger.Here().Debug("Some Text {Value}", i);
-            }
-            return 0;
-        }
-
-        [Benchmark]
-        public int WithHereDebugLevelcsharpstring()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Logger.Here().Debug($"Some Text {i}");
-            }
+            Logger.Here().Debug("Some Text {Value}", 2);
             return 0;
         }
 
         [Benchmark]
         public int WithDebugLevel()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                Logger.Debug("Some Text {Value}", i);
-            }
+            Logger.Debug("Some Text {Value}", 2);
             return 0;
         }
 
-        [Benchmark]
-        public int WithDebugLevelcsharpstring()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Logger.Debug($"Some Text {i}");
-            }
-            return 0;
-        }
-
-        [Benchmark]
-        public int WithVerboseLevel()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Logger.Verbose("Some Text {Value}", i);
-            }
-            return 0;
-        }
-
-        [Benchmark]
-        public int WithVerboseLevelcsharpstring()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Logger.Verbose($"Some Text {i}");
-            }
-            return 0;
-        }
 
         [Benchmark]
         public int WithHereVerboseLevel()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                Logger.Here().Verbose("Some Text {Value}", i);
-            }
+            Logger.Here().Verbose("Some Text {Value}", 2);
             return 0;
         }
 
         [Benchmark]
-        public int WithHereVerboseLevelcsharpstring()
+        public int WithHereLvlDebugLevel()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                Logger.Here().Verbose($"Some Text {i}");
-            }
+            Logger.HereLvl(LogEventLevel.Debug).Debug("Some Text {Value}", 2);
+            return 0;
+        }
+
+
+        [Benchmark]
+        public int WithHereLvlVerboseLevel()
+        {
+            Logger.HereLvl().Verbose("Some Text {Value}", 2);
             return 0;
         }
     }
